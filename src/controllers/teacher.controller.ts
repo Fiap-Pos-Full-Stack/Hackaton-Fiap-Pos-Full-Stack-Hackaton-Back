@@ -48,17 +48,13 @@ export class TeacherController {
 
   create = async (req: CustomRequest, res: Response) => {
     // #swagger.description = 'Criar um professor'
-    const { user, password, name } = req.body
-    const teacherId = req._id
+    const { user, password, name,discipline,ra } = req.body
     if (!user) { return res.status(400).json({ mensagem: 'The user is mandatory' }) }
     if (!password) { return res.status(400).json({ mensagem: 'The password is mandatory' }) }
     if (!name) { return res.status(400).json({ mensagem: 'The name is mandatory' }) }
     try {
-      if (teacherId) {
-        const newTeacher = await this.repository.createTeacher(user, password,name)
+      const newTeacher = await this.repository.createTeacher(user, password,name,discipline,ra )
         return res.status(201).json(newTeacher)
-      }
-      return res.status(500).json({ message: 'Invalid teacher' })
 
     }
     catch (error) {

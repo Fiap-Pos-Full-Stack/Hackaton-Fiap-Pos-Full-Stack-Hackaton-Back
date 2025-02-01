@@ -10,14 +10,14 @@ import { ContentRepository } from '../repositories/content.repository';
 const postRouter = Router();
 
 postRouter.get('/', new ContentController( new ContentRepository()).readAll);
-
+postRouter.get('/teacher',paramMiddleware([roles.TEACHER]), new ContentController( new ContentRepository()).readAllByTeacher);
 //postRouter.get('/admin', paramMiddleware([roles.TEACHER]),new PostController(new PostRepository(), new CommentRepository()).readTeacherPosts);
 
 //postRouter.get('/search', new PostController(new PostRepository(), new CommentRepository()).searchPosts)
 
 postRouter.get('/:id', new ContentController(new ContentRepository()).readId);
 
-postRouter.post('/', new ContentController( new ContentRepository()).create);
+postRouter.post('/', paramMiddleware([roles.TEACHER]),new ContentController( new ContentRepository()).create);
 
 //postRouter.put('/:id', paramMiddleware([roles.TEACHER]),new PostController(new PostRepository(), new CommentRepository()).update);
 

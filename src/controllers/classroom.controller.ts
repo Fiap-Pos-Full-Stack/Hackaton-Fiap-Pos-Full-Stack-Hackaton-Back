@@ -20,14 +20,13 @@ export class ClassroomController {
      const contents = await this.repository.getClassroomsRankingById(id);
      contents?.students?.forEach(student => {
          let studentPoints = 0
-         student.studentsQuizs.forEach(quiz => {
+         student.studentsQuizs?.forEach(quiz => {
              if(quiz.markedOption == quiz?.quiz?.rightOption){
                  studentPoints++
              }
          })
          rankingAux.push({student:student.name || "", id:student.id,point:studentPoints})
      })
-     console.log("rankingAux",rankingAux)
      return res.json(rankingAux.sort((a,b :RankingType ) => {
       if(a.point < b.point){
         return 1
@@ -52,9 +51,26 @@ export class ClassroomController {
       return res.status(500).json({ message: 'Internal Server Error' })
     }
   }
+  readByTeacher =  async (req: CustomRequest, res: Response) => {
+    // #swagger.description = 'Criar um post'
+   const teacherId = req._id
+   try {
+     if (teacherId) {
+       const newPost = await this.repository.getClassroomsByTeacherId(teacherId)
+       return res.status(201).json(newPost)
+     }
+     return res.status(500).json({ message: 'Invalid teacher' })
+
+   }
+   catch (error) {
+     console.error(error);
+     return res.status(500).json({ message: 'Internal Server Error' })
+   }
+ }
+
 
   create = async (req: CustomRequest, res: Response) => {
-     // #swagger.description = 'Criar um post'
+     console.log("criando turma")
     const {name,students} = req.body
     const teacherId = req._id
     if (!name) {

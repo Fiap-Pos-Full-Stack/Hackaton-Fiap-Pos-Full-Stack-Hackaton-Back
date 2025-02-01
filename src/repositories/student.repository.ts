@@ -37,11 +37,12 @@ export class StudentRepository {
         });
     };
 
-    createStudent= async (username: string, password:string, name :string): Promise<IStudent> => {
+    createStudent= async (username: string, password:string, name :string,ra:string): Promise<IStudent> => {
         const newPost = this.repository.create({
             username,
             password,
             name,
+            ra
         });
         return await this.repository.save(newPost);
      }

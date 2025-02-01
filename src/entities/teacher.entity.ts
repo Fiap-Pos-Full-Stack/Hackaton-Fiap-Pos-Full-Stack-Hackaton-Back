@@ -18,6 +18,12 @@ export class Teacher {
     @Column('varchar', { length: 2000, nullable: false })
     password: string;
 
+    @Column('varchar', { length: 200, nullable: true })
+    discipline: string;
+
+    @Column('varchar', { length: 200, nullable: true })
+    ra: string;
+
     @OneToMany(() => Content, (content) => content.teacher)
     contents: Content[]
 

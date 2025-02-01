@@ -8,10 +8,10 @@ export class Slide {
     @PrimaryGeneratedColumn('increment')
     id: number;
 
-    @Column('varchar', { length: 100, nullable: true })
+    @Column('varchar', { length: 1000, nullable: true })
     text: string;
 
-    @Column('varchar', { length: 100, nullable: true })
+    @Column('varchar', { length: 1000, nullable: true })
     image: string;
 
     @OneToOne(() => Quiz, (quiz) => quiz.slide,{   cascade: true,

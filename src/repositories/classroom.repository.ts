@@ -12,8 +12,18 @@ export class ClassroomRepository {
     getClassrooms = (): (Promise<[IClassRoom[], number]>) => {
         return this.repository.findAndCount({
             relations: { teacher: true, },
-            select: { teacher: { username: true, id: true } },
+            select: { teacher: { username: true, id: true } }
         });
+    }
+    getClassroomsByTeacherId = (id:number): (Promise<IClassRoom[]>) => {
+
+        return this.repository.createQueryBuilder("classroom")
+        .leftJoinAndSelect('classroom.teacher', 'teacher')
+        .leftJoinAndSelect('classroom.students', 'student')
+        .leftJoinAndSelect('student.studentsQuizs', 'student-do-quiz')
+        .leftJoinAndSelect('student-do-quiz.quiz', 'quiz')
+         .where('teacher.id = :id', { id: id }).getMany()
+
     }
     getClassroomsRankingById = ( id:number):  Promise<IClassRoom| null> => {
         return this.repository.createQueryBuilder("classroom")

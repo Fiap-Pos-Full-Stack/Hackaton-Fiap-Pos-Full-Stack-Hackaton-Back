@@ -10,7 +10,17 @@ export class ContentController {
   constructor(repository: ContentRepository) {
     this.repository = repository;
   }
-
+  readAllByTeacher = async (req: CustomRequest, res: Response) =>{
+    const teacher = req._id
+    try {
+      const contents = await this.repository.getContentsByTeacher(teacher||0);
+      return res.json(contents);
+    }
+    catch (error) {
+      console.error(error)
+      return res.status(500).json({ message: 'Internal Server Error' })
+    }
+  }
   getContentsByStudent  = async (req: CustomRequest, res: Response) =>{
     const studentId = req._id
     try {

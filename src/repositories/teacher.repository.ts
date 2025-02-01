@@ -26,10 +26,12 @@ export class TeacherRepository {
         });
     };
 
-    createTeacher = async (username: string, password:string, name :string): Promise<ITeacher> => {
+    createTeacher = async (username: string, password:string, name :string,discipline:string,ra:string ): Promise<ITeacher> => {
         const newPost = this.repository.create({
             username,
             password,
+            discipline,
+            ra,
             name,
         });
         return await this.repository.save(newPost);

@@ -13,6 +13,8 @@ const router = Router();
 
 router.get('/', new ClassroomController( new ClassroomRepository()).readAll);
 router.get('/quiz/ranking/:id', new ClassroomController( new ClassroomRepository()).readRankingById);
+router.get('/teacher', paramMiddleware([roles.TEACHER]),new ClassroomController( new ClassroomRepository()).readByTeacher);
+
 
 //postRouter.get('/admin', paramMiddleware([roles.TEACHER]),new PostController(new PostRepository(), new CommentRepository()).readTeacherPosts);
 

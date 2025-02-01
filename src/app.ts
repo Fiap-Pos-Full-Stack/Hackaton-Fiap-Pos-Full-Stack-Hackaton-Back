@@ -8,6 +8,7 @@ import loginRouter from './routes/login-routes';
 import studentRouter from './routes/student-routes';
 import quizRouter from './routes/quiz-routes';
 import classroomRouter from './routes/classroom-routes';
+import init from './routes/init-routes';
 const app = express();
 
 app.use(cors());
@@ -20,4 +21,5 @@ app.use('/student',studentRouter);
 app.use('/login',loginRouter);
 app.use('/quiz',quizRouter);
 app.use('/classroom',classroomRouter);
+app.use('/init',init);
 export default app;

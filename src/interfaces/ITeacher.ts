@@ -3,6 +3,9 @@ interface ITeacher {
     username?: string;
     name?: string;
     password?: string;
+    discipline?: string;
+    ra?: string;
+        
 }
 
 export default ITeacher;

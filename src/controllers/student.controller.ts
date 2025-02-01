@@ -80,13 +80,13 @@ export class StudentController {
 
   create = async (req: CustomRequest, res: Response) => {
     // #swagger.description = 'Criar um estudante'
-    const { user, password, name } = req.body
+    const { user, password, name ,ra} = req.body
     const teacherId = req._id
     if (!user) { return res.status(400).json({ mensagem: 'The user is mandatory' }) }
     if (!password) { return res.status(400).json({ mensagem: 'The password is mandatory' }) }
     if (!name) { return res.status(400).json({ mensagem: 'The name is mandatory' }) }
     try {
-      const newStudent = await this.repository.createStudent(user, password,name)
+      const newStudent = await this.repository.createStudent(user, password,name,ra)
       return res.status(201).json(newStudent)
 
     }

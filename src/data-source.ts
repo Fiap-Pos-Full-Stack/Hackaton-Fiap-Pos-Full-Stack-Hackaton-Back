@@ -10,6 +10,7 @@ import { Content } from "./entities/content.entity";
 import StudentDoQuiz from "./entities/student-do-quiz.entity";
 import Classroom from "./entities/classroom.entity";
 import ClassroomStudents from "./entities/classroom-students.entity";
+import Parent from "./entities/parent.entity";
 dotenv.config();
 export const AppDataSource = new DataSource({
     type: "postgres",
@@ -20,7 +21,7 @@ export const AppDataSource = new DataSource({
     database: process.env.POSTGRES_DB,
     synchronize: true,
     logging: false,
-    entities: [Student, Teacher, Comment, Content, Slide, Quiz,StudentDoQuiz, Classroom,ClassroomStudents], // where our entities reside
+    entities: [Student, Teacher, Comment, Content, Slide, Quiz,StudentDoQuiz, Classroom,ClassroomStudents, Parent], // where our entities reside
     migrations: ["src/migrations/*{.ts,.js}"], // where our migrations reside
     subscribers: [],
 })

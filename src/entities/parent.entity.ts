@@ -2,11 +2,11 @@ import { Entity, Column, ObjectId, PrimaryGeneratedColumn, ObjectIdColumn, Befor
 import StudentDoQuiz from './student-do-quiz.entity';
 import ClassroomStudents from './classroom-students.entity';
 import Classroom from './classroom.entity';
-import Parent from './parent.entity';
+import Student from './student.entity';
 
 
-@Entity('student')
-export class Student {
+@Entity('parent')
+export class Parent {
     @PrimaryGeneratedColumn('increment')
     id: number;
     
@@ -23,16 +23,10 @@ export class Student {
     ra: string;
 
 
-    @OneToMany(() => StudentDoQuiz, questionToCategory => questionToCategory.student)
-    public studentsQuizs: StudentDoQuiz[];
-
-    @ManyToOne(() => Classroom, classroomStudents => classroomStudents.students)
-    public classroom: Classroom;
-
-    @ManyToOne(() => Parent, classroomStudents => classroomStudents.childrens)
-    public parent: Parent;
+    @OneToMany(() => Student, c => c.parent)
+    public childrens: Student[];
 
 
 }
 
-export default Student;
+export default Parent;

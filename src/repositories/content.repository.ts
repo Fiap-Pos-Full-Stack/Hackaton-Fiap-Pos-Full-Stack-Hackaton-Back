@@ -14,11 +14,20 @@ export class ContentRepository {
             order: {slides: {id:"ASC"}}
         });
     }
+    getContentsByTeacher = (id: number): Promise<IContent[]| null> => {
+        return this.repository.find({
+            relations: { teacher: true,slides:true },
+            where: { teacher:{id:id} },
+            select: { teacher: { username: true, id: true,name:true } },
+            order: {slides: {id:"ASC"}}
+        });
+    };
+
     getContentById = (id: number): Promise<IContent| null> => {
         return this.repository.findOne({
             where: { id },
             relations: { teacher: true,slides:true },
-            select: { teacher: { username: true, id: true } },
+            select: { teacher: { username: true, id: true,name:true } },
             order: {slides: {id:"ASC"}}
             
         });
